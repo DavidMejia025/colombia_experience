@@ -1,3 +1,23 @@
 Rails.application.routes.draw do
+  get 'activities/index'
+  get 'activities/create'
+  get 'activities/delete'
+  get 'activities/show'
+  get 'activities/edit'
+  get 'tours/index'
+  get 'tours/create'
+  get 'tours/delete'
+  get 'tours/show'
+  get 'tours/edit'
+  get 'quotes/index'
+  get 'quotes/create'
+  get 'quotes/delete'
+  get 'quotes/show'
+  get 'quotes/edit'
+  get 'cities/index'
+  get 'cities/create'
+  get 'cities/delete'
+  get 'cities/show'
+  get 'cities/edit'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
