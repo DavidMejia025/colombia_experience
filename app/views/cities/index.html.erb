@@ -1,2 +1,12 @@
-<h1>Cities#index</h1>
-<p>Find me in app/views/cities/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h1> Escoge una ciudad:</h1>
+
+    <% @cities.each do |city| %>
+        <ul>
+          <li> <a href="/quotes/1/cities/1"> <%= city.name %> </a> </li>
+          <li> <a href="/cities/1"> <%= @qoute %> </a> </li>
+        </ul>
+    <% end %>
+  </div>
+</div>
