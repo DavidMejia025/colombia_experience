@@ -11,12 +11,26 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
+# Use SCSS for stylesheets
+gem 'bootstrap-sass', '~> 3.4.1'
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
+# Use application yml for env variables
+gem 'figaro'
+# PG Extensions
+gem 'pg_search'
+# Httparty
+gem 'httparty'
+#get fake data
+gem 'faker'
+# annotate db templates
+gem 'annotate'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
