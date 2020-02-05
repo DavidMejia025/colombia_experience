@@ -1,14 +1,21 @@
 class CitiesController < ApplicationController
   def index
+    puts "!!!!!!!!!!!!!!!!!!!!!!"
+    @quote = Quote.find(params[:quote_id])
+    @cities = City.all
   end
 
   def create
+  end
+
+  def new
   end
 
   def delete
   end
 
   def show
+    puts params
   end
 
   def edit
