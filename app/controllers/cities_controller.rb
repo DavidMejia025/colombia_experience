@@ -16,6 +16,8 @@ class CitiesController < ApplicationController
 
   def show
     puts params
+    @qoute = params[:quote_id]
+    @city = params[:id]
   end
 
   def edit

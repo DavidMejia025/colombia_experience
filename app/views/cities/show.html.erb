@@ -1,2 +1,26 @@
-<h1>Cities#show</h1>
-<p>Find me in app/views/cities/show.html.erb</p>
+<div class="container">
+  <div class="row">
+      <div class="col-md-4 col-md-offset-5" >
+        <p> <span class="glyphicon glyphicon-plus"></span></p>
+        <%= link_to("agraga una nueva actividad", new_city_activity_path(@city)) %>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4" style="border: red">
+            <h1> table </h1>
+        </div>
+      </div>
+      <div class="row blank_space"> </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <h1> other table</h1>
+        </div>
+        <div class="col-md-2 col-md-offset-2" style="border: red">
+
+        </div>
+        <div class="col-md-4">
+            <h1>last table</h1>
+        </div>
+      </div>
+  </div>
+</div>

@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   resources :quotes do
     resources :cities
+    resources :activities
+  end
+
+  resources :cities do
+    resources :activities
   end
 
 
