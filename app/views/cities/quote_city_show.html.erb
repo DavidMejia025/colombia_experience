@@ -4,15 +4,31 @@
   <div class="row">
     <div class="col-md-4">
       <h1> <%= City.find(@city).name %></h1>
-      <p>  summary data </p>
+      <p> summary data </p>
+    </div>
+    <div class="col-md-2 col-md-offset-2" style="border: red">
+
+    </div>
+    <div class="col-md-4">
+      <h1>last table</h1>
     </div>
   </div>
 
   <div class="row blank_space"> </div>
 
   <div class="row">
-    <%= link_to "crea una nueva actividad:", new_city_activity_path(@city) %>
+    <div class="form-group">
+      <%= form_for [:quote, Activity.new], url: {:controller => 'activities', action: "add_to_quote"}, html: {class: "nifty_form"} do |f| %>
+        <%= f.hidden_field :city, value: @city %>
+        <div class="col-sm-6">
+          <%=label_tag(:activity, "Actividad")%>
+          <%= f.collection_select :id, Activity.all.where(city_id: @city), :id, :name, class: "form-control"%>
+        </div>
+        <%= f.submit "Aniadir una actividad", class:"btn btn-primary" %>
+      <% end %>
+    </div>
   </div>
+
   <div class="row blank_space"> </div>
 
   <div class="row">
@@ -21,16 +37,14 @@
         <thead>
           <tr>
             <th scope="col">actividad</th>
-            <th>detalles </th>
             <th>actualizar precio</th>
             <th>borrar actividad</th>
           </tr>
         </thead>
         <tbody>
-          <% City.find(@city).activities.each do |activity| %>
+          <% Quote.find(@quote).activities.each do |activity| %>
             <tr>
               <td>  <%= activity.name %> </td>
-              <td>  ver mas </td>
               <td>  yes </td>
               <td>  no </td>
             </tr>
@@ -40,8 +54,4 @@
     </div>
   </div>
   <div class="row blank_space"> </div>
-
-  <div class="row">
-    <%= link_to "volver a ver todas las ciudades", cities_path %>
-  </div>
 </div>
