@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_05_015902) do
+ActiveRecord::Schema.define(version: 2020_02_08_201656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,10 @@ ActiveRecord::Schema.define(version: 2020_02_05_015902) do
     t.integer "city_id"
     t.integer "tour_id"
     t.integer "quote_id"
+    t.integer "total"
+    t.integer "total_per_person"
+    t.integer "days"
+    t.integer "ocupation"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -67,6 +71,7 @@ ActiveRecord::Schema.define(version: 2020_02_05_015902) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "activity_id"
+    t.boolean "checked", default: false
   end
 
 end
