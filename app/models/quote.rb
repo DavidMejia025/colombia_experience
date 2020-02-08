@@ -11,4 +11,12 @@ class Quote < ApplicationRecord
 
       self.activities.last.variable_costs << quote_activity_variable_costs
     end
+
+    def calculate_total_cost
+      self.activities.pluck(:total).sum
+    end
+
+    def calculate_total_cost_per_person
+      self.activities.pluck(:total_per_person).sum
+    end
 end
