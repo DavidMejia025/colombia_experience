@@ -29,8 +29,10 @@ gem 'pg_search'
 gem 'httparty'
 #get fake data
 gem 'faker'
-# annotate db templates
+# annotate db #templates
 gem 'annotate'
+#clone objects
+gem 'deep_cloneable', '~> 3.0.0'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password

@@ -4,7 +4,7 @@ class QuotesController < ApplicationController
   end
 
   def create
-    @quote = Quote.new(quotes_paras)
+    @quote = Quote.new(quotes_params)
 
     if @quote.save
       redirect_to quote_cities_path(@quote)
@@ -17,12 +17,33 @@ class QuotesController < ApplicationController
   end
 
   def show
+    @quote  = params[:id]
   end
 
   def edit
   end
 
-  def quotes_paras
-    params.require(:quote). permit(:trm, :margin)
+  def cost
+    @quote = Quote.find(params[:id])
+
+    @quote.calculate_total_cost
+    @quote.calculate_total_cost_per_person
+
+    @quote = @quote.id
+    render :show
+  end
+
+  def quotes_params
+    params.require(:quote). permit(:name, :trm, :margin)
   end
 end
+
+#
+# <% activity.variable_costs do |variable_cost| %>
+#   <tr>
+#       <td>  Checked: <%= variable_cost.checked %> </td>
+#       <td>  Cost: <%= variable_cost.cost %> </td>
+#       <td>  Capacity: <%= variable_cost.capacity %> </td>
+#       <td>  "" </td>
+#   </tr>
+# <% end%>

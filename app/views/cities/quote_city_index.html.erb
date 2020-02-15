@@ -4,8 +4,7 @@
 
     <% @cities.each do |city| %>
         <ul>
-          <li> <a href = <%="/quotes/#{@quote.id}/cities/1"%>> <%= city.name %> </a> </li>
-          <li> <a href = "/cities/1"> <%= @qoute %> </a> </li>
+          <li> <a href = <%="/quotes/#{@quote.id}/cities/#{city.id}"%>> <%= city.name %> </a> </li>
         </ul>
     <% end %>
   </div>

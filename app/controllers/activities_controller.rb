@@ -8,13 +8,12 @@ class ActivitiesController < ApplicationController
 
   def create
     if params[:quote_id]
-      puts params
-      puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111"
-      quote = Quote.find(params[:quote_id])
+      quote    = Quote.find(params[:quote_id])
       activity = Activity.find(params[:activity][:id])
-      activity_params = get_activity_params(activity: activity)
 
-      quote.activities.create(JSON.parse(activity_json))
+      quote.add_activity(activity: activity)
+puts params[:quoute_id]
+      redirect_to quote_city_path(params[:quote_id], params[:activity][:city])
     else
       city = City.find(params[:city_id])
 
@@ -28,6 +27,10 @@ class ActivitiesController < ApplicationController
     puts "heyyyyyyyyyyyyyahay"
   end
 
+  def costs
+    puts "heyyyddddddddddddddyyyyyyyyyyahay"
+
+  end
   def delete
   end
 

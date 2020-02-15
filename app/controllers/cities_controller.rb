@@ -33,6 +33,7 @@ class CitiesController < ApplicationController
     if params[:quote_id]
       @quote = params[:quote_id]
       @city  = params[:id]
+      @city_activities = City.find(@city).activities.where(quote_id: nil)#Activity.all.where(city_id: @city).uniq
       render :quote_city_show
     else
       @city  = params[:id]
