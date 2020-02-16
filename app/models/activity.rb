@@ -17,7 +17,7 @@ class Activity < ApplicationRecord
     def calculate_cost
       variable_cost_checked = self.variable_costs.where(checked: true).distinct.first
 
-      self.total = self.days * variable_cost_checked.cost
+      self.update(total: self.days * variable_cost_checked.cost)  
     end
 
     def calculate_cost_per_person

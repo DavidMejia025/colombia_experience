@@ -20,9 +20,17 @@
     <div class="form-group">
       <%= form_for [@quote, Activity.new], url: {:controller => 'activities', action: "create"}, html: {class: "nifty_form"} do |f| %>
         <%= f.hidden_field :city, value: @city %>
-        <div class="col-sm-6">
+        <div class="col-sm-12">
           <%=label_tag(:activity, "Actividad")%>
           <%= f.collection_select :id, @city_activities, :id, :name, class: "form-control"%>
+        </div>
+        <div class="col-sm-6">
+          <%=label_tag(:days, "# de dias")%>
+          <%= f.text_field :days, class: "form-control"%>
+        </div>
+        <div class="col-sm-6">
+          <%=label_tag(:ocupation, "Cantidad de personas")%>
+          <%= f.text_field :ocupation, class: "form-control"%>
         </div>
         <%= f.submit "Aniadir actividad", class:"btn btn-primary" %>
       <% end %>
@@ -45,7 +53,7 @@
           <% Quote.find(@quote).activities.each do |activity| %>
             <tr>
               <td>  <%= activity.name %> </td>
-              <td> a<%= button_to "Calcular precios", { action: "cost" }, form_class: "btn btn-light" %> </td>
+              <td> a </td>
               <td>  no </td>
             </tr>
           <% end %>

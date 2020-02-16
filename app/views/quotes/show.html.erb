@@ -31,16 +31,20 @@
           <tr>
             <th scope="col">actividad</th>
             <th>detalles </th>
+            <th>costo total</th>
+            <th>costo total por persona</th>
             <th>actualizar precio</th>
             <th>borrar actividad</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody>s
           <% Quote.find(@quote).activities.each do |activity| %>
             <tr style="background: rgb(51,255,227)">
               <td>  <%= activity.name %> </td>
               <td>  ver mas </td>
-              <td>  <td> a<%= button_to "Calcular precios", { action: "cost" }, form_class: "btn btn-light" %> </td> </td>
+              <td>  <%= activity.total %> </td>
+              <td>  <%= activity.total_per_person %> </td>
+              <td>  <%= button_to "Calcular precios", { controller: 'activities', action: "calculate_cost", activity: activity }, form_class: "btn btn-light" %> </td>
               <td>  no </td>
             </tr>
               <% activity.variable_costs.each do |variable_cost| %>

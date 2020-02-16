@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   post "/quotes/:id/activities",      to: "activities#add_to_quote"
   post "/quotes/:id/calculate_cost",  to: "quotes#cost"
-  post "/activities/calculate_cost",  to: "activities#cost"
+  post "/activities/calculate_cost",  to: "activities#calculate_cost"
 
 
 
