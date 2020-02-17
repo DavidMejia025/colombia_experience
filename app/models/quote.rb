@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: quotes
+#
+#  id               :bigint           not null, primary key
+#  name             :string
+#  total            :integer
+#  total_per_person :integer
+#  margin           :integer
+#  trm              :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
 class Quote < ApplicationRecord
     has_and_belongs_to_many :cities
     has_many :activities
