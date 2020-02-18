@@ -17,14 +17,15 @@ class ActivitiesController < ApplicationController
 
   def create
     if params[:quote_id]
-      quote    = Quote.find(params[:quote_id])
+      @quote    = Quote.find(params[:quote_id])
 
       activity = Activity.find(params[:activity][:id])
-      activity.update(days: activities_params[:days], ocupation: activities_params[:ocupation])
-
-      quote.add_activity(activity: activity)
-
-      redirect_to quote_city_path(params[:quote_id], params[:activity][:city])
+      # activity.update(days: activities_params[:days], ocupation: activities_params[:ocupation])
+      #
+      @quote.add_activity(activity: activity)
+      #
+      # redirect_to quote_city_path(params[:quote_id], params[:activity][:city])
+      redirect_to edit_quote_activity_path(params[:quote_id], Activity.last.id)
     else
       city = City.find(params[:city_id])
 
@@ -54,6 +55,10 @@ class ActivitiesController < ApplicationController
   end
 
   def edit
+    puts "xiamomiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+    puts params
+    @activity = Activity.find(params[:id])
+    @quote = Quote.find(params[:quote_id])
   end
 
   def activities_params

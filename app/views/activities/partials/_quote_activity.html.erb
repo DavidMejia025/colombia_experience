@@ -7,14 +7,6 @@
           <%=label_tag(:activity, "Actividad")%>
           <%= f.collection_select :id, @city_activities, :id, :name, class: "form-control"%>
         </div>
-        <div class="col-sm-6">
-          <%=label_tag(:days, "# de dias")%>
-          <%= f.text_field :days, class: "form-control"%>
-        </div>
-        <div class="col-sm-6">
-          <%=label_tag(:ocupation, "Cantidad de personas")%>
-          <%= f.text_field :ocupation, class: "form-control"%>
-        </div>
         <%= f.submit "Aniadir actividad", class:"btn btn-primary" %>
       <% end %>
     </div>

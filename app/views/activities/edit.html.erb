@@ -1,2 +1,15 @@
-<h1>Activities#edit</h1>
-<p>Find me in app/views/activities/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h1><%= @quote.activities.last.name %></h1>
+    <h1><%= @quote.activities.last.sub_activities.last.name %></h1>
+  </div>
+  <div class="form-group">
+    <%= form_tag("/search", method: "post") do %>
+      <% @activity.sub_activities.each do |sub_activity| %>
+        <%= label_tag(:name, "#{sub_activity.name}:") %>
+        <%= check_box_tag "sub_activity name", sub_activity.id -%>
+      <% end %>
+      <%= submit_tag("siguiente") %>
+    <% end %>
+  </div>
+</div>

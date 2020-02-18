@@ -15,7 +15,7 @@ class SubActivity < ApplicationRecord
 
   belongs_to :activity
 
-  def self.clone_sub_activity(activity:)
+  def self.clone(activity:)
     activity.sub_activities.map do |sub_activities|
       sub_activities.dup
     end

@@ -18,12 +18,15 @@ class Quote < ApplicationRecord
     has_many :tours
 
     def add_activity(activity: activity)
-      quote_activity                = activity.dup
-      quote_activity_variable_costs = activity.clone_variable_costs
-
+      quote_activity = activity.dup
       self.activities << quote_activity
 
-      self.activities.last.variable_costs << quote_activity_variable_costs
+      if activity.sub_activities
+        sub_activities = SubActivity.clone(activity: activity)
+
+        self.activities.last.sub_activities << sub_activities
+      else
+      end
     end
 
     def calculate_total_cost

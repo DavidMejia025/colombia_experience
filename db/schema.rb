@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_08_211616) do
+ActiveRecord::Schema.define(version: 2020_02_18_014223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 2020_02_08_211616) do
     t.integer "total_per_person"
     t.integer "days"
     t.integer "ocupation"
+  end
+
+  create_table "activity_options", force: :cascade do |t|
+    t.integer "capacity"
+    t.integer "cost"
+    t.integer "sub_activity_id"
+    t.integer "activity_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "checked", default: false
   end
 
   create_table "cities", force: :cascade do |t|
@@ -61,6 +71,15 @@ ActiveRecord::Schema.define(version: 2020_02_08_211616) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "sub_activities", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "activity_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "checked", default: false
+  end
+
   create_table "tours", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -70,15 +89,6 @@ ActiveRecord::Schema.define(version: 2020_02_08_211616) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "city_id"
     t.integer "quote_id"
-  end
-
-  create_table "variable_costs", force: :cascade do |t|
-    t.integer "capacity"
-    t.integer "cost"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "activity_id"
-    t.boolean "checked", default: false
   end
 
 end
