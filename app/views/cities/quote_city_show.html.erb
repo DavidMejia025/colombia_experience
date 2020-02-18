@@ -17,24 +17,10 @@
   <div class="row blank_space"> </div>
 
   <div class="row">
-    <div class="form-group">
-      <%= form_for [@quote, Activity.new], url: {:controller => 'activities', action: "create"}, html: {class: "nifty_form"} do |f| %>
-        <%= f.hidden_field :city, value: @city %>
-        <div class="col-sm-12">
-          <%=label_tag(:activity, "Actividad")%>
-          <%= f.collection_select :id, @city_activities, :id, :name, class: "form-control"%>
-        </div>
-        <div class="col-sm-6">
-          <%=label_tag(:days, "# de dias")%>
-          <%= f.text_field :days, class: "form-control"%>
-        </div>
-        <div class="col-sm-6">
-          <%=label_tag(:ocupation, "Cantidad de personas")%>
-          <%= f.text_field :ocupation, class: "form-control"%>
-        </div>
-        <%= f.submit "Aniadir actividad", class:"btn btn-primary" %>
-      <% end %>
-    </div>
+    <%= form_tag("/quotes/#{@quote}/activities/new", method: "get") do %>
+      <%= hidden_field_tag(:city_id, City.find(@city).id) %>
+      <%= submit_tag("Aniade una nueva actividad") %>
+    <% end %>
   </div>
 
   <div class="row blank_space"> </div>

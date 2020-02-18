@@ -3,13 +3,22 @@ class ActivitiesController < ApplicationController
   end
 
   def new
+    puts "2@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2222"
+    puts params
     @activity = Activity.new
+
+    if params[:quote_id]
+      @quote = Quote.find(params[:quote_id])
+      @city  = params[:city_id]
+      @city_activities = City.find(@city).activities.where(quote_id: nil)
+    else
+    end
   end
 
   def create
     if params[:quote_id]
       quote    = Quote.find(params[:quote_id])
-      
+
       activity = Activity.find(params[:activity][:id])
       activity.update(days: activities_params[:days], ocupation: activities_params[:ocupation])
 
