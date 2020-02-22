@@ -3,14 +3,14 @@
 
   <div class="row">
     <div class="col-md-4">
-      <h1> <%= City.find(@city).name %></h1>
+      <h1> <%= @city.name %></h1>
       <p> summary data </p>
     </div>
     <div class="col-md-2 col-md-offset-2" style="border: red">
 
     </div>
     <div class="col-md-4">
-      <h1>last table</h1>
+      <h3> <%= link_to "Ver Cotizacion", quote_path(@quote) %> </h3>
     </div>
   </div>
 
@@ -19,7 +19,7 @@
   <div class="row">
     <div class="form-group">
       <%= form_for [@quote, Activity.new], url: {:controller => 'activities', action: "create"}, html: {class: "nifty_form"} do |f| %>
-        <%= f.hidden_field :city, value: @city %>
+        <%= f.hidden_field :city, value: @city.id %>
         <div class="col-sm-12">
           <%=label_tag(:activity, "Actividad")%>
           <%= f.collection_select :id, @city_activities, :id, :name, class: "form-control"%>
@@ -42,9 +42,9 @@
           </tr>
         </thead>
         <tbody>
-          <% Quote.find(@quote).activities.each do |activity| %>
+          <% @quote.activities.each do |activity| %>
             <tr>
-              <td>  <%= activity.name %> </td>
+              <td>  <%= link_to activity.name, quote_activity_path(@quote.id ,activity.id) %> </td>
               <td> a </td>
               <td>  no </td>
             </tr>

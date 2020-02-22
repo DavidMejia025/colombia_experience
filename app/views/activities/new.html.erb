@@ -1,5 +1,5 @@
 <% if (@quote) %>
-  <%= render 'activities/partials/quote_activity', { quote: @quote, city_activities: @city_activities } %>
+  <%= render 'activities/partials/new_quote_activity', { quote: @quote, city_activities: @city_activities } %>
 <% else %>
-  <%= render 'activities/partials/city_activity', { activity: @activity } %>
+  <%= render 'activities/partials/new_city_activity', { activity: @activity } %>
 <% end %>

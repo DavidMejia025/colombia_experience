@@ -15,13 +15,10 @@
 class ActivityOption < ApplicationRecord
   has_one  :activity
   has_one  :sub_activity
-  # def self.clone_activity_options(activity: )
-  #   activity.activity_options.map do |activity_option|
-  #     activity_option.dup
-  #   end
-  # end
-  #
-  # def sums
-  #   2+2
-  # end
+
+  def self.clone(activity:)
+    activity.activity_options.map do |activity_option|
+      activity_option.dup
+    end
+  end
 end

@@ -17,8 +17,9 @@
       </div>
     </div>
     <div class="col-md-6">
-      <h2> Costo total: <%= Quote.find(@quote).total %></h2>
-      <h3> Costo total por persona: <%= Quote.find(@quote).total_per_person %></h3>
+      <% Quote.find(@quote).cities.distinct.each do |city| %>
+        <h5> <%= link_to "Modificar #{city.name}", quote_city_path(@quote, city) %> </h5>
+      <% end %>
     </div>
   </div>
 
@@ -30,31 +31,38 @@
         <thead>
           <tr>
             <th scope="col">actividad</th>
-            <th>detalles </th>
+            <th>dias </th>
+            <th>ocupacion </th>
             <th>costo total</th>
             <th>costo total por persona</th>
             <th>actualizar precio</th>
             <th>borrar actividad</th>
           </tr>
         </thead>
-        <tbody>s
+        <tbody>
           <% Quote.find(@quote).activities.each do |activity| %>
             <tr style="background: rgb(51,255,227)">
               <td>  <%= activity.name %> </td>
-              <td>  ver mas </td>
+              <td>  <%= activity.days %> </td>
+              <td>  <%= activity.ocupation %> </td>
               <td>  <%= activity.total %> </td>
               <td>  <%= activity.total_per_person %> </td>
               <td>  <%= button_to "Calcular precios", { controller: 'activities', action: "calculate_cost", activity: activity }, form_class: "btn btn-light" %> </td>
-              <td>  no </td>
+              <td>  <%= link_to 'Descartar', quote_activity_path(@quote, activity), data: {:confirm => 'Estas seguro?'}, :method => :delete %></td>
             </tr>
-              <% activity.variable_costs.each do |variable_cost| %>
-                <tr>
-                    <td>  Capacity: <%= variable_cost.capacity %> </td>
-                    <td>  Cost: <%= variable_cost.cost %> </td>
-                    <td>  Checked: <%= variable_cost.checked %> </td>
-                    <td>  "" </td>
-                </tr>
-              <% end%>
+              <% activity_option = activity.sub_activities.find_by(checked:true).activity_options.find_by(checked:true)%>
+            <tr>
+              <td>  <%= activity.sub_activities.find_by(checked:true).name %> </td>
+              <td>  </td>
+              <td>  </td>
+              <td>  </td>
+            </tr>
+            <tr>
+              <td>  Capacity: <%= activity_option.capacity %> </td>
+              <td>  Cost: <%= activity_option.cost %> </td>
+              <td>  Checked: <%= activity_option.checked %> </td>
+              <td>  "" </td>
+            </tr>
           <% end %>
         </tbody>
       </table>

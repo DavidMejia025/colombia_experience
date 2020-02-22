@@ -4,6 +4,8 @@ class CitiesController < ApplicationController
 
     if params[:quote_id]
       @quote = Quote.find(params[:quote_id])
+      puts "adfasfafafaf"
+      puts params
       render :quote_city_index
     else
       render :index
@@ -31,9 +33,12 @@ class CitiesController < ApplicationController
 
   def show
     if params[:quote_id]
-      @quote = params[:quote_id]
-      @city  = params[:id]
-      @city_activities = City.find(@city).activities.where(quote_id: nil)#Activity.all.where(city_id: @city).uniq
+      @quote = Quote.find(params[:quote_id])
+      @city  = City.find(params[:id])
+
+      @quote.cities << @city
+      @city_activities = @city.activities.where(quote_id: nil)#Activity.all.where(city_id: @city).uniq
+
       render :quote_city_show
     else
       @city  = params[:id]

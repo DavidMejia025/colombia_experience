@@ -17,6 +17,7 @@ class QuotesController < ApplicationController
   end
 
   def show
+    puts params
     @quote  = params[:id]
   end
 

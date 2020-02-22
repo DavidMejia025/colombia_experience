@@ -17,7 +17,7 @@ class Quote < ApplicationRecord
     has_many :activities
     has_many :tours
 
-    def add_activity(activity: activity)
+    def add_activity(activity:)
       quote_activity = activity.dup
       self.activities << quote_activity
 
@@ -25,6 +25,14 @@ class Quote < ApplicationRecord
         sub_activities = SubActivity.clone(activity: activity)
 
         self.activities.last.sub_activities << sub_activities
+
+        activity.sub_activities.each do|sub_activity|
+          activity_options = ActivityOption.clone(activity: sub_activity)
+
+          puts destination_sub_activity = sub_activities.select{|sub_act| sub_act.name == sub_activity.name}.first
+
+          destination_sub_activity.activity_options << activity_options
+        end
       else
       end
     end

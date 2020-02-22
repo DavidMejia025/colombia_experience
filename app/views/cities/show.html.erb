@@ -27,7 +27,7 @@
           </tr>
         </thead>
         <tbody>
-          <% City.find(@city).activities.each do |activity| %>
+          <% City.find(@city).activities.where(quote_id: nil).each do |activity| %>
             <tr>
               <td>  <%= activity.name %> </td>
               <td>  ver mas </td>
