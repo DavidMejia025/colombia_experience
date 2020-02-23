@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="">
+      <h1> <%= @sub_activity.name %> </h1>
+    </div>
+    <div class="">
+      <h1> <%= @sub_activity.description %> </h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= link_to "Agregar una opcion", new_sub_activity_activity_option_path(@sub_activity) %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <% if @sub_activity.activity_options %>
+        <% @sub_activity.activity_options.each do |activity_option| %>
+          <div class="col-md-12">
+            <p> Capacity: <%= activity_option.capacity %> </p>
+          </div>
+          <div class="col-md-12">
+            <p> Cost: <%= activity_option.cost %> </p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= link_to "Finalizar", city_activity_path(@sub_activity.activity.city, @sub_activity.activity) %>
+    </div>
+  </div>
+</div>

@@ -21,7 +21,7 @@ class Activity < ApplicationRecord
     belongs_to :city
     has_one    :tour
     has_one    :quote
-    has_many   :activity_option
+    has_many   :activity_options
     has_many   :sub_activities
 
     def clone_variable_costs

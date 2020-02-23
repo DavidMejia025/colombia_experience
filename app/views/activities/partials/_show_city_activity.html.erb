@@ -6,8 +6,20 @@
     <div class="">
       <h1> <%= @activity.description %> </h1>
     </div>
+  </div>
+
+  <div class="row">
     <div class="">
-      <% if @activity.sub_activities %>
+      <h5> <%= link_to "Aniade una sub actividad", new_activity_sub_activity_path(@activity) %> </h5>
+    </div>
+    <div class="">
+      <h5> <%= link_to "Aniade una opcion a la actividad",  new_activity_activity_option_path(@activity)%> </h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="">
+      <% if !@activity.sub_activities.empty? %>
         <div class="">
             <h3>Opciones:</h3>
         </div>
@@ -15,16 +27,16 @@
         <h3> nombre de la sub actividad: <%= sub_activity.name %></h3>
           <% sub_activity.activity_options.each do |activity_option| %>
             <div class="">
-              <h2> Capacity: <%= sub_activity.activity_options.capacity %></h2>
-              <h2> Cost: <%= @activity_option.cost %></h2>
+              <h2> Capacity: <%= activity_option.capacity %></h2>
+              <h2> Cost: <%= activity_option.cost %></h2>
             </div>
           <% end %>
         <% end %>
       <% else %>
         <% @activity.activity_options.each do |activity_option| %>
           <div class="">
-            <h2> Capacity: <%= sub_activity.activity_options.capacity %></h2>
-            <h2> Cost: <%= @activity_option.cost %></h2>
+            <h2> Capacity: <%= activity_option.capacity %></h2>
+            <h2> Cost: <%= activity_option.cost %></h2>
           </div>
         <% end %>
       <% end %>

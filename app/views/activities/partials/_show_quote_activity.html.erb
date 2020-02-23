@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="">
+      <h1> Activity name<%= @activity.name %> </h1>
+      <h2> Dias: <%= @activity.days %> </h2>
+      <h2> Participantes:<%= @activity.ocupation %> </h2>
+    </div>
+
+    <div class="">
+      <% if @sub_activity %>
+        <h3> nombre de la sub actividad: <%= @sub_activity.name %></h3>
+      <% end %>
+    </div>
+
+    <div class="">
+      <h2> Capacity: <%= @activity_option.capacity %></h2>
+      <h2> Cost: <%= @activity_option.cost %></h2>
+    </div>
+  </div>
+
+  <div class="">
+    <h3> <%= link_to "volver", quote_city_path(@quote.id, @city.id) %> </h3>
+  </div>
+</div>

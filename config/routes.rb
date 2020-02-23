@@ -12,6 +12,15 @@ Rails.application.routes.draw do
     resources :activities
   end
 
+  resources :activities do
+    resources :sub_activities
+    resources :activity_options
+  end
+
+  resources :sub_activities do
+    resources :activity_options
+  end
+
   post "/quotes/:id/activities",      to: "activities#add_to_quote"
   post "/quotes/:id/calculate_cost",  to: "quotes#cost"
   post "/activities/calculate_cost",  to: "activities#calculate_cost"

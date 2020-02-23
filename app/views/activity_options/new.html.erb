@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="form-group">
+      <%= form_for [@sub_activity, @activity_option], url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+        <div class="form-group">
+          <%= f.label :capacity%>
+        </div>
+        <div class="">
+          <%= f.text_field :capacity, class: "form-control"%>
+        </div>
+        <div class="form-group">
+          <div class="">
+            <%= f.label :cost%>
+          </div>
+          <div class="">
+            <%= f.text_area :cost, class: "form-control"%>
+          </div>
+        </div>
+        <%= f.submit "Agregar", class:"btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
