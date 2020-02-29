@@ -3,7 +3,7 @@ class CreateOptions < ActiveRecord::Migration[6.0]
     create_table :options do |t|
       t.string :name
       t.string :description, default: "bla bla bla bla blaaaaaaaaa"
-      i.integer :service_id
+      t.integer :service_id
       t.timestamps
     end
   end
