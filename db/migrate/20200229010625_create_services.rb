@@ -3,7 +3,8 @@ class CreateServices < ActiveRecord::Migration[6.0]
     create_table :services do |t|
       t.string :name
       t.string :description
-
+      t.integer :vendor_id
+      t.integer :city_id
       t.timestamps
     end
   end
