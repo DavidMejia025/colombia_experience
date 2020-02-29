@@ -1,0 +1,2 @@
+class ServiceCost < ApplicationRecord
+end
