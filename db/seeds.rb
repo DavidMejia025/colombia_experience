@@ -8,33 +8,29 @@
 Client.destroy_all
 Quote.destroy_all
 City.destroy_all
-# Activity.destroy_all
-# SubActivity.destroy_all
-# ActivityOption.destroy_all
+Vendor.destroy_all
+Service.destroy_all
+# Option.destroy_all
+# Price.destroy_all
 
-client = client.create!
+quote = Quote.create
 
-client.quotes.create()
+category = Category.create!(name: "Hotel")
 
-category = Category.create(name: Hotel)
+city = City.create!(name:"Bogota")
 
-city = City.create(name:"Bogota")
+vendor = city.vendors.create!({name: "Ibis", category_id: category.id})
 
-city.vendors.create(name: "Ibis", category_id: category.id)
-#
-# city = City.create!(name: "Bogota")
-#
-# activity = city.activities.create!(name:"partido contra santa fe")
-#
-#
-# sub_activity = activity.sub_activities.create!(name:"Lateral")
-# #
-# option_a = sub_activity.activity_options.create!(cost: 20000, capacity: 1)#, sub_activity_id: SubActivity.last,  activity_id: Activity.last)
-# option_b = sub_activity.activity_options.create!(cost: 40000, capacity: 1)
-# option_c = sub_activity.activity_options.create!(cost: 70000, capacity: 1)
-#
-# sub_activity = activity.sub_activities.create!(name:"Oriental")
-#
-# option_a = sub_activity.activity_options.create!(cost: 20000, capacity: 1)#, sub_activity_id: SubActivity.last,  activity_id: Activity.last)
-# option_b = sub_activity.activity_options.create!(cost: 40000, capacity: 1)
-# option_c = sub_activity.activity_options.create!(cost: 70000, capacity: 1)
+service = vendor.services.create!({name: "standard", city_id: city.id})
+
+option = service.options.create(name: "temporada alta")
+price = option.prices.create(capacity: 2, value: 200000)
+
+option = service.options.create(name: "temporada baja")
+price = option.prices.create(capacity: 2, value: 100000)
+
+option = service.options.create(name: "temporada alta j-d")
+price = option.prices.create(capacity: 2, value: 300000)
+
+option = service.options.create(name: "temporada baja j-d")
+price = option.prices.create(capacity: 2, value: 150000)

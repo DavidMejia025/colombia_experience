@@ -1,3 +1,6 @@
 class Tour < ApplicationRecord
-    belongs_to :city
+  has_many :tour_costs
+  has_many :quotes, through: :tour_costs
+
+  belongs_to :city
 end
