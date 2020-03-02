@@ -4,16 +4,18 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :quotes do
-    resources :cities, only: :show
+    resources :cities,   only: :show
     resources :services, only: [:show]
+    resources :tours,    only: [:show]
   end
 
   resources :category
 
   resources :vendor
-  
+
   resources :cities do
     resources :services
+    resources :tours
   end
 
   resources :activities do
