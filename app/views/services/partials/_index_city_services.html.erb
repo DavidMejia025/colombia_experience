@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="row blank_space"> </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <h1> <%= @city.name %></h1>
+    </div>
+  </div>
+
+  <div class="row blank_space"> </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <h1> Filters </h1>
+    </div>
+    <div class="col-md-4">
+      <h1> filter </h1>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <%= form_for [@city, Vendor.new], url: {:controller => 'services', action: "create"}, html: {class: "nifty_form"} do |f| %>
+          <%= f.hidden_field :city, value: @city %>
+          <div class="col-sm-8">
+            <%=label_tag(:category_name, "category")%>
+            <%= f.collection_select :category_id, @categories, :id, :name, class: "form-control"%>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <%= f.label :add_category%>
+            </div>
+            <div class="">
+              <%= f.text_field :category, class: "form-control"%>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="form-group">
+              <%= f.label :name%>
+            </div>
+            <div class="">
+              <%= f.text_field :name, class: "form-control"%>
+            </div>
+          </div>
+          <%= f.submit "Aniadir un nuevo proveedor", class:"btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row blank_space" style="margin-top:40px"> </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <%= form_for [@city, Service.new], url: {:controller => 'services', action: "create"}, html: {class: "nifty_form"} do |f| %>
+          <%= f.hidden_field :city, value: @city %>
+          <div class="col-sm-8">
+            <%=label_tag(:category_name, "category")%>
+            <%= f.collection_select :id, @categories, :id, :name, class: "form-control"%>
+          </div>
+          <div class="col-sm-8">
+            <%=label_tag(:vendor_name, "vendor")%>
+            <%= f.collection_select :vendor_id, @vendors, :id, :name, class: "form-control"%>
+          </div>
+          <div class="col-sm-12">
+            <div class="form-group">
+              <%= f.label :name%>
+            </div>
+            <div class="">
+              <%= f.text_field :name, class: "form-control"%>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="form-group">
+              <%= f.label :description%>
+            </div>
+            <div class="">
+              <%= f.text_area :description, class: "form-control"%>
+            </div>
+          </div>
+          <%= f.submit "Aniadir servicio", class:"btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row blank_space"> </div>
+
+  <div class="row">
+    <div class="col-md-12" style="border: red">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"> Categoria </th>
+            <th> Proveedor </th>
+            <th> Servicio</th>
+            <th>detalles </th>
+            <th>actualizar precio</th>
+            <th>borrar actividad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @city_services.each do |service| %>
+            <tr>
+              <td>  <%= service.vendor.category.name %> </td>
+              <td>  <%= service.vendor.name %> </td>
+              <td>  <%= service.name %> </td>
+              <td>  ver mas </td>
+              <td>  yes </td>
+              <td>  no </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>

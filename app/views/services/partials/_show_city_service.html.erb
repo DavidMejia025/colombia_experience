@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="">
+      <h1> <%= @service.name %> </h1>
+    </div>
+    <div class="">
+      <h1> <%= @service.description %> </h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <%= form_for [@service, Option.new], url: {:controller => 'options', action: "create"}, html: {class: "nifty_form"} do |f| %>
+          <%= f.hidden_field :service_id, value: @service.id %>
+          <div class="col-sm-12">
+            <div class="form-group">
+              <%= f.label :name%>
+            </div>
+            <div class="">
+              <%= f.text_field :name, class: "form-control"%>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="form-group">
+              <%= f.label :description%>
+            </div>
+            <div class="">
+              <%= f.text_area :description, class: "form-control"%>
+            </div>
+          </div>
+          <%= f.submit "Aniadir una opcion", class:"btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="">
+      <% @service.options.each do |option| %>
+        <div class="">
+          <h2> Opcion: <%= option.name %></h2>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="">
+      <h5> <%= link_to "Finalizar", city_services_path(@service.city) %> </h5>
+    </div>
+  </div>
+</div>

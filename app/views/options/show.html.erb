@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="">
+      <h1> <%= @option.name %> </h1>
+    </div>
+    <div class="">
+      <h1> <%= @option.description %> </h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <%= form_for Price.new, :url => { :action => "create" }, :html => {:class => "nifty_form"} do |f| %>
+          <%= f.hidden_field :option_id, value: @option.id %>
+          <div class="col-sm-12">
+            <div class="form-group">
+              <%= f.label :capacity%>
+            </div>
+            <div class="">
+              <%= f.text_field :capacity, class: "form-control"%>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="form-group">
+              <%= f.label :value%>
+            </div>
+            <div class="">
+              <%= f.text_field :value, class: "form-control"%>
+            </div>
+          </div>
+          <%= f.submit "Aniadir un precio1", class:"btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="">
+      <% @option.prices.each do |price| %>
+        <div class="">
+          <h2> Capacidad: <%= price.capacity %></h2>
+          <h2> Costo: <%= price.value %></h2>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="">
+      <h5> <%= link_to "Volver al servicio", city_service_path(@option.service.city, @option.service) %> </h5>
+    </div>
+  </div>
+</div>

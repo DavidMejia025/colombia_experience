@@ -18,9 +18,8 @@ Rails.application.routes.draw do
     resources :tours
   end
 
-  resources :activities do
-    resources :sub_activities
-    resources :activity_options
+  resources :services do
+    resources :options
   end
 
   resources :options do

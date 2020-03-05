@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row blank_space"> </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <h1> <%= @city.name %></h1>
+      <p>  summary data </p>
+    </div>
+  </div>
+
+  <div class="row blank_space"> </div>
+
+  <div class="row">
+    <%= link_to "Ir a ver Servicios", city_services_path(@city.id) %>
+  </div>
+
+  <div class="row blank_space"> </div>
+
+  <div class="row">
+    <%= link_to "ir a ver toures", city_tours_path(@city.id) %>
+  </div>
+
+  <div class="row">
+    <%= link_to "volver a ver todas las ciudades", cities_path %>
+  </div>
+</div>
