@@ -97,20 +97,14 @@
             <th scope="col"> Categoria </th>
             <th> Proveedor </th>
             <th> Servicio</th>
-            <th>detalles </th>
-            <th>actualizar precio</th>
-            <th>borrar actividad</th>
           </tr>
         </thead>
         <tbody>
           <% @city_services.each do |service| %>
             <tr>
-              <td>  <%= service.vendor.category.name %> </td>
+              <td>  <%= service.vendor.category.name %></td>
               <td>  <%= service.vendor.name %> </td>
-              <td>  <%= service.name %> </td>
-              <td>  ver mas </td>
-              <td>  yes </td>
-              <td>  no </td>
+              <td>  <%= link_to service.name, city_service_path(@city, service) %> </td>
             </tr>
           <% end %>
         </tbody>

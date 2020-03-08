@@ -24,7 +24,7 @@ class OptionsController < ApplicationController
 
       @option = @service.options.last
     end
-    redirect_to service_option_path(@service, @service.options.last)
+    redirect_to service_option_path(@service, @option)
   end
 
   def option_params

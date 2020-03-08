@@ -1,5 +1,5 @@
 class ServicesController < ApplicationController
-  before_action :get_service_city_and_quote
+  before_action :get_service_city_and_quote, except: [:add_quote_options, :new_quote_services, :add_quote_service]
 
   def index
     if @city
@@ -11,6 +11,12 @@ class ServicesController < ApplicationController
       @vendors
       @city_services = Service.where(city_id: @city.id)
     end
+  end
+
+  def new
+    @quote = Quote.find(params[:quote_id])
+
+    get_quote_service_params()
   end
 
   def create
@@ -28,6 +34,26 @@ class ServicesController < ApplicationController
     @city
 
     redirect_to city_service_path(@city, @city.services.last)
+  end
+
+  def new_quote_services
+    get_quote_service_params
+
+    @cities_services =  @vendors.services
+
+    @quote = Quote.find(params[:id])
+
+    render "new_quote_services"
+  end
+
+  def get_quote_service_params
+    @cities = params[:city_id] ? City.find(params[:city_id]) : City.all
+
+    @vendors = params[:vendor_id] ? Vendor.find(params[:vendor_id]) : Vendor.all
+
+    #@vendors = @vendors.where(category_id: params[:category_id]) if @vendors.length > 1 && params[:category_id]
+
+    @categories = params[:category_id] ? Category.find(params[:category_id]) : Category.all
   end
 
   def get_service_city_and_quote

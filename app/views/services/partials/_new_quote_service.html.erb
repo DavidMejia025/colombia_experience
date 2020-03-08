@@ -1,0 +1,13 @@
+<%= form_with(url: "/quotes/#{@quote.id}/add_quote_service", method: "post", local: true) do %>
+  <%= label_tag(:pax, "Numero de personas:") %>
+  <%= text_field_tag(:pax) %>
+
+  <%= label_tag(:services, "Numbero de servicios:") %>
+  <%= text_field_tag(:services) %>
+
+  <% services_array = @cities_services.map { |service| [service.name, service.id] } %>
+
+  <%= select_tag(:service_id, options_for_select(services_array)) %>
+
+  <%= submit_tag "siguiente" %>
+<% end %>

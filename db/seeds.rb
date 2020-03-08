@@ -10,6 +10,7 @@ Quote.destroy_all
 City.destroy_all
 Vendor.destroy_all
 Service.destroy_all
+Category.destroy_all
 # Option.destroy_all
 # Price.destroy_all
 
