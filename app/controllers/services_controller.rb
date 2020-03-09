@@ -1,5 +1,5 @@
 class ServicesController < ApplicationController
-  before_action :get_service_city_and_quote, except: [:add_quote_options, :new_quote_services, :add_quote_service]
+  before_action :get_service_city_and_quote, except: [:show, :add_quote_options, :new_quote_services, :add_quote_service]
 
   def index
     if @city
@@ -17,6 +17,16 @@ class ServicesController < ApplicationController
     @quote = Quote.find(params[:quote_id])
 
     get_quote_service_params()
+  end
+
+  def show
+    @service = Service.find(params[:id])
+
+    if params[:quote_id]
+      @quote = Quote.find(params[:quote_id])
+    elsif params[:city_id]
+      @city = City.find(params[:city_id])
+    end
   end
 
   def create

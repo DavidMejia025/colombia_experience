@@ -6,49 +6,46 @@
     <div class="">
       <h1> <%= @service.description %> </h1>
     </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-8">
-      <div class="form-group">
-        <%= form_for [@service, Option.new], url: {:controller => 'options', action: "create"}, html: {class: "nifty_form"} do |f| %>
-          <%= f.hidden_field :service_id, value: @service.id %>
-          <div class="col-sm-12">
-            <div class="form-group">
-              <%= f.label :name%>
-            </div>
-            <div class="">
-              <%= f.text_field :name, class: "form-control"%>
-            </div>
-          </div>
-          <div class="col-sm-12">
-            <div class="form-group">
-              <%= f.label :description%>
-            </div>
-            <div class="">
-              <%= f.text_area :description, class: "form-control"%>
-            </div>
-          </div>
-          <%= f.submit "Aniadir una opcion", class:"btn btn-primary" %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
     <div class="">
-      <h2> Opciones: </h2>
-      <% @service.options.each do |option| %>
-        <div class="">
-          <h2> <%= link_to option.name, service_option_path(@service, option)  %></h2>
-        </div>
+      <% @service_costs = @quote.service_costs.where(service_id: @service.id) %>
+
+      <% @service_costs.each do |service_cost| %>
+        <h1> Numero de pax: <%= service_cost.pax %> </h1>
+
+        <h1> Cantidad de servicios: <%= service_cost.services %> </h1>
       <% end %>
     </div>
   </div>
 
   <div class="row">
     <div class="">
-      <h5> <%= link_to "Finalizar", city_services_path(@service.city) %> </h5>
+      <h2> Opciones: </h2>
+      <ul>
+        <% @options = @quote.options.where(service_id: @service.id) %>
+        <% @options.each do |option| %>
+        <li>
+           <h3><%= option.name %></h3>
+
+          <% @prices = @quote.prices.where(option_id: option.id) %>
+
+          <% @prices.each do |price| %>
+            <p>Precio: <%= price.value %> </p>
+          <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="">
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="">
+      <h5> <%= link_to "volver", quote_path(@quote) %> </h5>
     </div>
   </div>
 </div>
