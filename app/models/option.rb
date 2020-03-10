@@ -10,7 +10,8 @@
 #  updated_at  :datetime         not null
 #
 class Option < ApplicationRecord
-  has_and_belongs_to_many :quotes
+  has_many :service_costs
+  has_many :quotes, through: :service_costs
   belongs_to :service
   has_many :prices
 end

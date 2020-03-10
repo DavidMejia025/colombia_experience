@@ -8,6 +8,8 @@
         <h3> TRM: <%= @quote.trm %></h3>
         <h3> Margen de ganancia: <%= @quote.margin %></h3>
         <h3> Moneda: <%= @quote.currency %></h3>
+        <h3> Costo total: @quote.service_costs.pluck</h3>
+        <h3> Costo por persona: </h3>
       </div>
     </div>
     <div class="col-md-6">
@@ -20,19 +22,27 @@
   <div class="row blank_space"> </div>
 
   <div class="row">
-    <%= link_to "aniadir servicio:", new_quote_service_path(@quote)  %>
-  </div>
+    <div class="col-md-8" style="border: red">
+      <div class="row">
+        <%= link_to "aniadir servicio:", new_quote_service_path(@quote)  %>
+      </div>
 
-  <div class="row">
-    <%= link_to "aniadir tour:", new_quote_tour_path(@quote) %>
-  </div>
+      <div class="row">
+        <%= link_to "aniadir tour:", new_quote_tour_path(@quote) %>
+      </div>
+    </div>
 
+    <div class="col-md-4" style="border: red">
+      <%= link_to "Calcular precio de la cotizacion:", "/quotes/#{@quote.id}/calculate_cost" %>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-12" style="border: red">
       <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col"> Categoria </th>
+            <th scope="col"> Ciudad <th>
+            <th > Categoria </th>
             <th> Proveedor </th>
             <th> Servicio</th>
           </tr>
@@ -40,6 +50,7 @@
         <tbody>
           <% @services.distinct.each do |service| %>
             <tr>
+              <td>  <%= service.city.name %></td>
               <td>  <%= service.vendor.category.name %></td>
               <td>  <%= service.vendor.name %> </td>
               <td>  <%= link_to service.name, quote_service_path(@quote, service) %> </td>

@@ -1,39 +1,26 @@
 <div class="container">
   <div class="row">
     <div class="">
-      <h1> <%= @service.name %> </h1>
+      <h1> Servicio: <%= @service.name %> </h1>
     </div>
     <div class="">
-      <h1> <%= @service.description %> </h1>
+      <h1> Descripcion: <%= @service.description %> </h1>
     </div>
     <div class="">
       <% @service_costs = @quote.service_costs.where(service_id: @service.id) %>
 
       <% @service_costs.each do |service_cost| %>
-        <h1> Numero de pax: <%= service_cost.pax %> </h1>
+        <ul>
+          <h3> Numero de pax: <%= service_cost.pax %> </h3>
 
-        <h1> Cantidad de servicios: <%= service_cost.services %> </h1>
+          <h3> Cantidad de servicios: <%= service_cost.services %> </h3>
+
+          <p> Opcion <%= Option.find(service_cost.option_id).name %> </p>
+
+          <p> precio por  <%= Price.find(service_cost.price_id).capacity %> PAX es de <%= Price.find(service_cost.price_id).value %> </p>
+        </ul>
+
       <% end %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="">
-      <h2> Opciones: </h2>
-      <ul>
-        <% @options = @quote.options.where(service_id: @service.id) %>
-        <% @options.each do |option| %>
-        <li>
-           <h3><%= option.name %></h3>
-
-          <% @prices = @quote.prices.where(option_id: option.id) %>
-
-          <% @prices.each do |price| %>
-            <p>Precio: <%= price.value %> </p>
-          <% end %>
-          </li>
-        <% end %>
-      </ul>
     </div>
   </div>
 

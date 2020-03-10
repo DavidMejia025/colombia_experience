@@ -17,6 +17,6 @@ class Quote < ApplicationRecord
   has_many :tours, through: :tour_costs
   has_many :service_costs
   has_many :services, through: :service_costs
-  has_and_belongs_to_many :options
-  has_and_belongs_to_many :prices
+  has_many :options, through: :service_costs
+  has_many :prices, through: :service_costs
 end

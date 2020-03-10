@@ -33,6 +33,6 @@ Rails.application.routes.draw do
   post "/quotes/:id/add_quote_option",    to: "quotes#add_quote_option"
   post "/quotes/:id/add_quote_price",     to: "quotes#add_quote_price"
 
-  post "/quotes/:id/calculate_cost",  to: "quotes#cost"
+  get "/quotes/:id/calculate_cost",  to: "quotes#calculate_cost"
   post "/activities/calculate_cost",  to: "activities#calculate_cost"
 end
