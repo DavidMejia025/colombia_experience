@@ -1,0 +1,5 @@
+<% if (@city) %>
+  <%= render 'tours/partials/index_city_tours', { city: @city, tours: @tours } %>
+<% else %>
+  <%= render 'tours/partials/index_quote_tours', { quote: @quote, tours: @tours } %>
+<% end %>

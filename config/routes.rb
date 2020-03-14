@@ -34,5 +34,13 @@ Rails.application.routes.draw do
   post "/quotes/:id/add_quote_price",     to: "quotes#add_quote_price"
 
   get "/quotes/:id/calculate_cost",  to: "quotes#calculate_cost"
-  post "/activities/calculate_cost",  to: "activities#calculate_cost"
+
+  post "/cities/:id/tours/:id/select_new_service",      to: "tours#select_new_service"
+  post "/cities/:id/tours/:id/select_category_service", to: "tours#select_category_service"
+  post "/cities/:id/tours/:id/select_vendor_service",   to: "tours#select_vendor_service"
+  post "/cities/:id/tours/:id/select_service",          to: "tours#select_service"
+
+  post "/cities/:id/add_quote_service",   to: "cities#add_quote_service"
+  post "/cities/:id/add_quote_option",    to: "cities#add_quote_option"
+  post "/cities/:id/add_quote_price",     to: "cities#add_quote_price"
 end

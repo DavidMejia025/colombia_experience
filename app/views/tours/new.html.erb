@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row blank_space"> </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <%= form_with(url: "/quotes/#{@quote.id}/tours", method: "post", local: true) do %>
+          <% tours = @tours.map { |tour| [tour.name, tour.id] } %>
+          <%= select_tag(:tour_id, options_for_select(tours)) %>
+
+          <%= submit_tag "Siguiente" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row blank_space" style="margin-top:40px"> </div>
+
+  <div class="row blank_space"> </div>
+</div>

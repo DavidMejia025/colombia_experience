@@ -41,22 +41,40 @@ class QuotesController < ApplicationController
   end
 
   def calculate_cost
-    @quote =  Quote.find(params[:id])
+    @quote = Quote.find(params[:id])
 
     @quote.service_costs.each do |service_cost|
       calculate_service_cost_costs(service_cost: service_cost)
     end
 
+    cost = @quote.service_costs.pluck(:cost).sum
+    cost_per_person = @quote.service_costs.pluck(:cost_per_person).sum
+
+    @quote.update!(cost: cost)
+    @quote.update!(cost_per_person: cost_per_person)
+
+puts "12312313"
+puts @quote.to_json
+
     redirect_to  quote_path(@quote)
   end
 
   def calculate_service_cost_costs(service_cost:)
-    price = Price.find(service_cost.price_id).value
+    price = Price.find(service_cost.price_id)
 
     pax = service_cost.pax
 
     services = service_cost.services
 
-    service_cost.update!(price * pax * services)
+    unless price.capacity == 1
+      cost = price.value * services
+      cost_per_person = cost / pax
+    else
+      cost = price.value * pax * services
+      cost_per_person = price.value * services
+    end
+
+    service_cost.update!(cost: cost)
+    service_cost.update!(cost_per_person: cost_per_person)
   end
 end

@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row blank_space"> </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h1> <%= @city.name %></h1>
+      </div>
+    </div>
+
+    <div class="row blank_space" style="margin-top:40px"> </div>
+    <h1>TOurs ma friend</h1>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="form-group">
+          <%= form_for [@city, Tour.new], url: {:controller => 'tours', action: "create"}, html: {class: "nifty_form"} do |f| %>
+            <%= f.hidden_field :city, value: @city %>
+            <div class="col-sm-12">
+              <div class="form-group">
+                <%= f.label :name%>
+              </div>
+              <div class="">
+                <%= f.text_field :name, class: "form-control"%>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group">
+                <%= f.label :description%>
+              </div>
+              <div class="">
+                <%= f.text_area :description, class: "form-control"%>
+              </div>
+            </div>
+            <%= f.submit "Aniadir tour", class:"btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row blank_space"> </div>
+
+    <div class="row">
+      <div class="col-md-12" style="border: red">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col"> Categoria </th>
+              <th> Proveedor </th>
+              <th> Servicio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @tours.each do |tour| %>
+              <tr>
+                <td>  <%= tour.name %></td>
+                <td>  <%= tour.description %> </td>
+                <td>  <%= link_to tour.name, city_tour_path(@city, tour) %> </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row">
+      <%= link_to "volver", city_path(@city) %>
+    </div>
+  </div>

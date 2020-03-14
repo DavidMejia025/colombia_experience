@@ -11,7 +11,7 @@
 #  updated_at  :datetime         not null
 #
 class Service < ApplicationRecord
-  has_and_belongs_to_many :tour
+  has_and_belongs_to_many :tours
 
   has_many :service_costs
   has_many :quotes, through: :service_costs
