@@ -1,0 +1,5 @@
+<% if (@quote) %>
+  <%= render 'services/partials/show_quote_service', { quote: @quote, service: @service } %>
+<% else %>
+  <%= render 'services/partials/show_city_service', { city: @city, service: @service } %>
+<% end %>

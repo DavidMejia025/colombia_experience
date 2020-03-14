@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_29_125013) do
+ActiveRecord::Schema.define(version: 2020_03_10_011956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,10 +61,24 @@ ActiveRecord::Schema.define(version: 2020_02_29_125013) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "options_quotes", force: :cascade do |t|
+    t.integer "option_id"
+    t.integer "quote_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "prices", force: :cascade do |t|
     t.integer "capacity", default: 1000
     t.integer "value", default: 10
     t.integer "option_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "prices_quotes", force: :cascade do |t|
+    t.integer "price_id"
+    t.integer "quote_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -77,6 +91,8 @@ ActiveRecord::Schema.define(version: 2020_02_29_125013) do
     t.integer "client_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "cost"
+    t.integer "cost_per_person"
   end
 
   create_table "quotes_options", force: :cascade do |t|
@@ -96,6 +112,10 @@ ActiveRecord::Schema.define(version: 2020_02_29_125013) do
     t.integer "service_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "option_id"
+    t.integer "price_id"
+    t.integer "cost"
+    t.integer "cost_per_person"
   end
 
   create_table "services", force: :cascade do |t|

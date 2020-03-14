@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <h1> Escoge una ciudad:</h1>
+  </div>
+  <div class="row">
+    <% @cities.each do |city| %>
+        <ul>
+          <li> <%= link_to "#{city.name}", city_path(city.id) %> </li>
+        </ul>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= form_for City.new, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+          <div class="form-group">
+            <%= f.label :name%>
+          </div>
+          <div class="">
+            <%= f.text_field :name, class: "form-control"%>
+          </div>
+          <%= f.submit "Create", class:"btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <%= link_to "volver", home_index_path %>
+  </div>
+</div>

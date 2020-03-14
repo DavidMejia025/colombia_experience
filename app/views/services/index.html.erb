@@ -1,0 +1,5 @@
+<% if (@city) %>
+  <%= render 'services/partials/index_city_services', { city: @city, city_activities: @city_services } %>
+<% else %>
+  <%= render 'services/partials/index_quote_services', { quote: @quote, categories: @categories, vendors: @vendors, services: @services } %>
+<% end %>

@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row blank_space"> </div>
+
+  <%= form_with(url: "/quotes/#{@quote.id}/add_quote_price", method: "post", local: true) do %>
+    <% prices = @option.prices.map { |price| ["Capacidad: #{price.capacity}, Precio: #{price.value}", price.id] } %>
+
+    <%= select_tag(:price_id, options_for_select(prices)) %>
+
+    <%= submit_tag "finalizar" %>
+  <% end %>
+
+  <div class="row blank_space" style="margin-top:40px"> </div>
+
+  <div class="row blank_space"> </div>
+</div>

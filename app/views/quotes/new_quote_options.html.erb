@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row blank_space"> </div>
+
+  <%= form_with(url: "/quotes/#{@quote.id}/add_quote_option", method: "post", local: true) do %>
+    <% options = @service.options.map { |option| [option.name, option.id] } %>
+
+    <%= select_tag(:option_id, options_for_select(options)) %>
+
+    <%= submit_tag "siguiente" %>
+  <% end %>
+
+  <div class="row blank_space" style="margin-top:40px"> </div>
+
+  <div class="row blank_space"> </div>
+</div>

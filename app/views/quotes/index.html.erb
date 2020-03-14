@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="">
+      <h1>Crear una nueva cotizacion</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <%= form_for @quote, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+      <div class="form-group">
+        <%= f.label :client%>
+      </div>
+      <div class="">
+        <%= f.text_field :client, class: "form-control"%>
+      </div>
+        <div class="form-group">
+          <%= f.label :trm%>
+        </div>
+        <div class="">
+          <%= f.text_field :trm, class: "form-control"%>
+        </div>
+        <div class="form-group">
+          <div class="">
+            <%= f.label :margin%>
+          </div>
+          <div class="">
+            <%= f.text_field :margin, class: "form-control"%>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="">
+            <%= f.label :currency_enum%>
+          </div>
+          <div class="">
+            <%= f.text_field :currency, class: "form-control"%>
+          </div>
+        </div>
+        <%= f.submit "Create", class:"btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12" style="border: red">
+        <% Quote.all.each do |quote| %>
+          <ul>
+            <li><%= link_to "#{quote.client}", quote_path(quote.id) %> </li>
+          </ul>
+        <% end %>
+    </div>
+  </div>
+</div>

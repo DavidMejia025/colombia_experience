@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="">
+      <h1> Servicio: <%= @service.name %> </h1>
+    </div>
+    <div class="">
+      <h1> Descripcion: <%= @service.description %> </h1>
+    </div>
+    <div class="">
+      <% @service_costs = @quote.service_costs.where(service_id: @service.id) %>
+
+      <% @service_costs.each do |service_cost| %>
+        <ul>
+          <h3> Numero de pax: <%= service_cost.pax %> </h3>
+
+          <h3> Cantidad de servicios: <%= service_cost.services %> </h3>
+
+          <p> Opcion <%= Option.find(service_cost.option_id).name %> </p>
+
+          <p> precio por  <%= Price.find(service_cost.price_id).capacity %> PAX es de <%= Price.find(service_cost.price_id).value %> </p>
+
+          <h3> Costo total: <%= service_cost.cost %> </h3>
+          <h3> Costo por persona: <%= service_cost.cost_per_person %> </h3>
+        </ul>
+
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="">
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="">
+      <h5> <%= link_to "volver", quote_path(@quote) %> </h5>
+    </div>
+  </div>
+</div>

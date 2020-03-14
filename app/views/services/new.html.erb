@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row blank_space"> </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <%= form_with(url: "/quotes/#{@quote.id}/new_quote_services", method: "post", local: true) do %>
+          <% cities_array = @cities.map { |city| [city.name, city.id] } %>
+          <%= select_tag(:city_id, options_for_select(cities_array)) %>
+
+          <% categories_array = @categories.map { |category| [category.name, category.id] } %>
+          <%= select_tag(:category_id, options_for_select(categories_array)) %>
+
+          <% vendors_array = @vendors.map { |vendor| [vendor.name, vendor.id] } %>
+          <%= select_tag(:vendor_id, options_for_select(vendors_array)) %>
+
+          <%= submit_tag "siguiente" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row blank_space" style="margin-top:40px"> </div>
+
+  <div class="row blank_space"> </div>
+</div>

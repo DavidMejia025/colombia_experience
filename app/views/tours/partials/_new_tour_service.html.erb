@@ -1,0 +1,16 @@
+<% if @vendor %>
+  <%= form_with(url: "/cities/#{@city.id}/tours/#{@tour.id}/select_service", method: "post", local: true) do %>
+    <% services = @services.map { |service| [service.name, service.id] } %>
+    <%= select_tag(:service_id, options_for_select(services)) %>
+
+    <%= submit_tag "siguiente" %>
+  <% end %>
+
+<% elsif @vendors %>
+  <%= form_with(url: "/cities/#{@city.id}/tours/#{@tour.id}/select_vendor_service", method: "post", local: true) do %>
+    <% vendors = @vendors.map { |vendor| [vendor.name, vendor.id] } %>
+    <%= select_tag(:vendor_id, options_for_select(vendors)) %>
+
+    <%= submit_tag "siguiente" %>
+  <% end %>
+<% end %>

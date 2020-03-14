@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="">
+      <h1> <%= @tour.name %> </h1>
+    </div>
+    <div class="">
+      <h1> <%= @tour.description %> </h1>
+    </div>
+  </div>
+
+  <div class="row blank_space"> </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <%= form_with(url: "/cities/#{@city.id}/tours/#{@tour.id}/select_new_service", method: "post", local: true) do %>
+          <%= hidden_field_tag "city_id", "#{@city.id}"%>
+          <%= submit_tag "Aniadir un nuevo servicio", class:"btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12" style="border: red">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"> Categoria </th>
+            <th> Proveedor </th>
+            <th> Servicio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @services.each do |service| %>
+            <tr>
+              <td>  <%= service.name %></td>
+              <td>  <%= tour.description %> </td>
+              <td>  <%= link_to service.name, city_service_path(@city, service) %> </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  <div class="row">
+    <div class="">
+      <h5> <%= link_to "Finalizar", city_tours_path(@tour.city) %> </h5>
+    </div>
+  </div>
+</div>

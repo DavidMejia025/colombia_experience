@@ -1,0 +1,6 @@
+<%= form_with(url: "/cities/#{@city.id}/tours/#{@tour.id}/select_category_service", method: "post", local: true) do %>
+  <% categories = @categories.map { |category| [category.name, category.id] } %>
+  <%= select_tag(:category_id, options_for_select(categories)) %>
+
+  <%= submit_tag "siguiente" %>
+<% end %>
