@@ -82,6 +82,15 @@ class ToursController < ApplicationController
     redirect_to city_tour_path(@city, @city.tours.last)
   end
 
+  def create_quote_tour
+    puts "innnnnnnnnnnnnnnnnnnnnnnnnn"
+    @tour = Tour.find(params[:tour_id])
+    @quote = Quote.find(params[:id])
+
+    #@tour.tour_costs.create(pax: 10, quote_id: @quote.id)
+    render "quote_tour_services"
+  end
+
   def add_category_to_tour
   end
 

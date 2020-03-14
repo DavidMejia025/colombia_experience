@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row blank_space"> </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h1> <%= @quote.id %></h1>
+      </div>
+    </div>
+
+    <div class="row blank_space" style="margin-top:40px"> </div>
+    <h1>TOurs ma friend1</h1>
+
+    <div class="row blank_space"> </div>
+
+    <div class="row">
+      <div class="col-md-12" style="border: red">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col"> Categoria </th>
+              <th> Proveedor </th>
+              <th> Servicio</th>
+              <th> Aniadir </th>
+              <th> Remover </th>
+              <th> incluido </td>
+            </tr>
+          </thead>
+          <tbody>
+            <% @tour.services.each do |service| %>
+              <tr>
+                <td>  <%= service.name %></td>
+                <td>  <%= service.description %> </td>
+                <td>  <%= link_to service.name %> </td>
+                <td>  <p> add </p></td>
+                <td>  <p> remover </p></td>
+                <td>  <p> si/no </p></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p> agregar </p>
+    <p>volver</p>
+
+  </div>
