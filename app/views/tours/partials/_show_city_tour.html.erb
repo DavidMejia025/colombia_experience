@@ -28,6 +28,7 @@
             <th scope="col"> Categoria </th>
             <th> Proveedor </th>
             <th> Servicio</th>
+            <th> Retirar servicio </th>
           </tr>
         </thead>
         <tbody>
@@ -36,6 +37,7 @@
               <td>  <%= service.name %></td>
               <td>  <%= tour.description %> </td>
               <td>  <%= link_to service.name, city_service_path(@city, service) %> </td>
+              <td> yes </td>
             </tr>
           <% end %>
         </tbody>

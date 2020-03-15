@@ -5,19 +5,47 @@ class QuotesController < ApplicationController
 
   def show
     @quote = Quote.find(params[:id])
-    @services = @quote.services
+    @services = @quote.services.distinct
+
+    @services = @services.select{|service| service.tours.blank? }
   end
 
   def add_quote_service
-    @quote = Quote.find(params[:id])
-    @service = Service.find(params[:service_id])
+    if params[:service_id]
+      @quote = Quote.find(params[:id])
+      @service = Service.find(params[:service_id])
 
-    @quote.cities << @service.city
+      @quote.cities << @service.city
 
-    @service.service_costs.create!({services: params[:services], pax: params[:pax], quote_id: @quote.id})
-    @service = Service.find(params[:service_id])
+      @service.service_costs.create!({services: params[:services], pax: params[:pax], quote_id: @quote.id})
+    else
+      quote_service_params = params[:id].split(",")
+
+      @service = Service.find(quote_service_params.second.to_i)
+      @quote = Quote.find(quote_service_params.first.to_i)
+
+      @service.service_costs.create!({services: params[:services], pax: params[:pax], quote_id: @quote.id})
+    end
 
     render  "new_quote_options" # and return
+  end
+
+  def delete_quote_service
+    quote_service_params = params[:id].split(",")
+
+    @service = Service.find(quote_service_params.second.to_i)
+    @quote = Quote.find(quote_service_params.first.to_i)
+
+    service_costs = @service.service_costs.where(quote_id: @quote.id)
+
+    service_costs.each {|service_cost| service_cost.delete}
+
+    @tour = @service.tours.first
+
+    #it will be necessary to think about when the service belongs to multiple
+    #tours. POssible oportunitiy to try a join with tour costs and so on.
+
+    render "tours/quote_tour_services"
   end
 
   def add_quote_option
@@ -37,7 +65,20 @@ class QuotesController < ApplicationController
     service_cost = @quote.service_costs.last
     service_cost.update!(price_id: @price.id)
 
-    redirect_to  quote_path(@quote)
+    @service = service_cost.service
+
+    if @service.tours.blank?
+      redirect_to  quote_path(@quote)
+    else
+      @tour = @service.tours.first
+
+      #it will be necessary to think about when the service belongs to multiple
+      #tours. POssible oportunitiy to try a join with tour costs and so on.
+
+      #@tour = tour_cost.tour
+
+      render "tours/quote_tour_services"
+    end
   end
 
   def calculate_cost

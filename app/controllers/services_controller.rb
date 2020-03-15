@@ -1,5 +1,5 @@
 class ServicesController < ApplicationController
-  before_action :get_service_city_and_quote, except: [:show, :add_quote_options, :new_quote_services, :add_quote_service]
+  before_action :get_service_city_and_quote, except: [:show, :add_quote_options, :new_quote_services, :add_quote_service, :new_quote_tour_services]
 
   def index
     if @city
@@ -50,6 +50,20 @@ class ServicesController < ApplicationController
     get_quote_service_params
 
     @cities_services =  @vendors.services
+
+    @quote = Quote.find(params[:id])
+
+    render "new_quote_services"
+  end
+
+  def new_quote_tour_services
+    #get_quote_service_params
+    quote_tour_service_params = params[:id].split(",")
+    @service = Service.find(quote_tour_service_params[2])
+    @tour = Tour.find(quote_tour_service_params[1])
+    @quote = Quote.find(quote_tour_service_params[0])
+    puts "I love youuuuuuuuuuuuuUUUUUU"
+    #@cities_services =  @vendors.services
 
     @quote = Quote.find(params[:id])
 

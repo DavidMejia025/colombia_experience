@@ -11,9 +11,9 @@ Rails.application.routes.draw do
     resources :prices,   only: [:show, :new, :index]
   end
 
-  resources :category
+  resource :category
 
-  resources :vendor
+  resource :vendor
 
   resources :cities do
     resources :services
@@ -32,12 +32,16 @@ Rails.application.routes.draw do
   post "/quotes/:id/add_quote_service",   to: "quotes#add_quote_service"
   post "/quotes/:id/add_quote_option",    to: "quotes#add_quote_option"
   post "/quotes/:id/add_quote_price",     to: "quotes#add_quote_price"
+  get  "/quotes/:id/services/:id/add_quote_service",      to: "quotes#add_quote_service", as: "quote_tour_service"
+  delete "/quotes/:id/services/:id/remove_quote_service", to: "quotes#delete_quote_service", as: "quote_tour_remove_service"
+  get "/quotes/:id/calculate_cost",                       to: "quotes#calculate_cost"
 
-  get "/quotes/:id/calculate_cost",  to: "quotes#calculate_cost"
+  post "/quotes/:id/tours",                               to: "tours#create_quote_tour"
+  post "/quotes/:id/tours/:id/",                          to: "tours#index_quote_tour"
+  get  "/quotes/:id/tours/:id/services",                  to: "tours#quote_tour_services",   as: "quote_tour_services"
+  delete "/quotes/:id/tours/:id/remove_quote_tour",       to: "tours#delete_quote_tour", as: "quote_remove_tour"
 
-  post "/quotes/:id/tours",       to: "tours#create_quote_tour"
-  post "/quotes/:id/tours/:id/",  to: "tours#index_quote_tour"
-
+  #get "/quotes/:id/tours/:id/services/:id/add_service",  to: "services#new_quote_tour_services"
 
   post "/cities/:id/tours/:id/select_new_service",      to: "tours#select_new_service"
   post "/cities/:id/tours/:id/select_category_service", to: "tours#select_category_service"

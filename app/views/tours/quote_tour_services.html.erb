@@ -8,7 +8,8 @@
     </div>
 
     <div class="row blank_space" style="margin-top:40px"> </div>
-    <h1>TOurs ma friend1</h1>
+
+    <h1>TOurs ma </h1>
 
     <div class="row blank_space"> </div>
 
@@ -22,18 +23,31 @@
               <th> Servicio</th>
               <th> Aniadir </th>
               <th> Remover </th>
-              <th> incluido </td>
+              <th> incluido </th>
             </tr>
           </thead>
           <tbody>
             <% @tour.services.each do |service| %>
+              <% service_cost = service.service_costs.find_by(quote_id: @quote.id) %>
               <tr>
                 <td>  <%= service.name %></td>
                 <td>  <%= service.description %> </td>
                 <td>  <%= link_to service.name %> </td>
-                <td>  <p> add </p></td>
-                <td>  <p> remover </p></td>
-                <td>  <p> si/no </p></td>
+                <td>
+                  <p>
+                    <%= link_to quote_tour_service_path("#{@quote.id}, #{service.id}"), class: "btn btn-default" do %>
+                        <i class="glyphicon glyphicon-plus"></i>
+                    <% end %>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    <%= link_to quote_tour_remove_service_path("#{@quote.id}, #{service.id}"), class: "btn btn-default", data: { confirm: 'Are you sure?' }, method: :delete do %>
+                        <i class="glyphicon glyphicon-minus"></i>
+                    <% end %>
+                  </p>
+                </td>
+                <td>  <p> <%= service_cost ? "Si" : "No" %> </p></td>
               </tr>
             <% end %>
           </tbody>
@@ -42,6 +56,6 @@
     </div>
 
     <p> agregar </p>
-    <p>volver</p>
+    <p> <%= link_to "volver", quote_path(@quote) %> </p>
 
   </div>

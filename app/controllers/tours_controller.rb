@@ -4,9 +4,19 @@ class ToursController < ApplicationController
   def index
     @city = City.find(params[:city_id])
     @tour = Tour.new
+
     if @city
       @tours = @city.tours
     end
+  end
+
+  def quote_tour_services
+    quote_tour_params = params[:id].split(",")
+
+    @tour = Tour.find(quote_tour_params.second.to_i)
+    @quote = Quote.find(quote_tour_params.first.to_i)
+
+    render "quote_tour_services"
   end
 
   def new
@@ -16,7 +26,6 @@ class ToursController < ApplicationController
       @cities = params[:city_id] ? City.where(id: params[:city_id]) : City.all
 
       @tours = @cities.map { |city| Tour.all.where(city_id: city.id) }.flatten
-
     else
       @city = City.find(params[:city_id])
       @categories = Category.all
@@ -83,12 +92,34 @@ class ToursController < ApplicationController
   end
 
   def create_quote_tour
-    puts "innnnnnnnnnnnnnnnnnnnnnnnnn"
     @tour = Tour.find(params[:tour_id])
     @quote = Quote.find(params[:id])
 
-    #@tour.tour_costs.create(pax: 10, quote_id: @quote.id)
+    @tour.tour_costs.create(pax: 10, quote_id: @quote.id)
     render "quote_tour_services"
+  end
+
+  def delete_quote_tour
+    quote_tour_params = params[:id].split(",")
+
+    @tour = Tour.find(quote_tour_params.second.to_i)
+    @quote = Quote.find(quote_tour_params.first.to_i)
+
+    remove_tour_services(tour: @tour, quote: @quote)
+
+    tour_costs = @tour.tour_costs
+
+    tour_costs.each {|tour_cost| tour_cost.delete}
+
+    redirect_to quote_path(@quote)
+  end
+
+  def remove_tour_services(tour:, quote:)
+    tour.services.each do |service|
+      service_costs = service.service_costs.where(quote_id: quote.id)
+
+      service_costs.each {|service_cost| service_cost.delete}
+    end
   end
 
   def add_category_to_tour
@@ -102,16 +133,6 @@ class ToursController < ApplicationController
     @quote = Quote.find(params[:id])
 
     render "new_quote_services"
-  end
-
-  def get_quote_service_params
-    #@cities = params[:city_id] ? City.find(params[:city_id]) : City.all
-
-    #@vendors = params[:vendor_id] ? Vendor.find(params[:vendor_id]) : Vendor.all
-
-    #@vendors = @vendors.where(category_id: params[:category_id]) if @vendors.length > 1 && params[:category_id]
-
-    #@categories = params[:category_id] ? Category.find(params[:category_id]) : Category.all
   end
 
   def get_service_city_and_quote

@@ -36,19 +36,51 @@
       <%= link_to "Calcular precio de la cotizacion:", "/quotes/#{@quote.id}/calculate_cost" %>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-12" style="border: red">
+      <% if @quote.tours.length > 0 %>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th > Ciudad </th>
+              <th > Nombre del tour </th>
+              <th>  Descartar </th>
+              <th> yes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @quote.tours.each do |tour| %>
+              <tr>
+                <td>  <%= tour.city.name %></td>
+                <td>  <%= link_to tour.name, quote_tour_services_path("#{@quote.id}, #{tour.id}") %></td>
+                <td>
+                    <%= link_to quote_remove_tour_path("#{@quote.id}, #{tour.id}"), class: "btn btn-default", data: { confirm: 'Are you sure?' }, method: :delete do %>
+                        <i class="glyphicon glyphicon-minus"></i>
+                    <% end %>
+                </td>
+                <td>  yes </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-md-12" style="border: red">
       <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col"> Ciudad <th>
+            <th > Ciudad </th>
             <th > Categoria </th>
             <th> Proveedor </th>
             <th> Servicio</th>
           </tr>
         </thead>
         <tbody>
-          <% @services.distinct.each do |service| %>
+          <% @services.each do |service| %>
             <tr>
               <td>  <%= service.city.name %></td>
               <td>  <%= service.vendor.category.name %></td>
